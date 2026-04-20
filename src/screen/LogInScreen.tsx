@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  StatusBar,
-  Dimensions,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import { StatusBar, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
 const { width } = Dimensions.get('window');
@@ -28,53 +23,48 @@ export default function LoginScreen() {
 
       {/* 2. The Interactive Sheet */}
       <Sheet>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={{ flex: 1 }}
-        >
-          <Handle />
+        <Handle />
 
-          <BrandGroup>
-            <Brand>
-              IRON<AccentText>CORE</AccentText>
-            </Brand>
-            <Motto>Precision training for the elite athlete.</Motto>
-          </BrandGroup>
+        <BrandGroup>
+          <Brand>
+            IRON<AccentText>CORE</AccentText>
+          </Brand>
+          <Motto>Precision training for the elite athlete.</Motto>
+        </BrandGroup>
 
-          <FormArea>
-            <InputContainer>
-              <Label>IDENTITY</Label>
-              <StyledInput
-                placeholder="Email or Username"
-                placeholderTextColor="#475569"
-                value={email}
-                onChangeText={setEmail}
-                autoCapitalize="none"
-              />
-            </InputContainer>
+        <FormArea>
+          <InputContainer>
+            <Label>IDENTITY</Label>
+            <StyledInput
+              placeholder="Email or Username"
+              placeholderTextColor="#475569"
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+            />
+          </InputContainer>
 
-            <InputContainer>
-              <Label>ACCESS KEY</Label>
-              <StyledInput
-                placeholder="••••••••"
-                placeholderTextColor="#475569"
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword}
-              />
-            </InputContainer>
+          <InputContainer>
+            <Label>ACCESS KEY</Label>
+            <StyledInput
+              placeholder="••••••••"
+              placeholderTextColor="#475569"
+              secureTextEntry
+              value={password}
+              onChangeText={setPassword}
+            />
+          </InputContainer>
 
-            <LoginButton activeOpacity={0.8}>
-              <ButtonText>UNLEASH POWER</ButtonText>
-            </LoginButton>
+          <LoginButton activeOpacity={0.8}>
+            <ButtonText>UNLEASH POWER</ButtonText>
+          </LoginButton>
 
-            <FooterRow>
-              <FooterLink>Lost Access?</FooterLink>
-              <Divider />
-              <FooterLink>Join The Elite</FooterLink>
-            </FooterRow>
-          </FormArea>
-        </KeyboardAvoidingView>
+          <FooterRow>
+            <FooterLink>Lost Access?</FooterLink>
+            <Divider />
+            <FooterLink>Join The Elite</FooterLink>
+          </FooterRow>
+        </FormArea>
       </Sheet>
     </Container>
   );
