@@ -10,12 +10,17 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import LoginScreen from './src/screen/LogInScreen';
 import styled from 'styled-components/native';
 
+//nav service
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigation from './src/navigation/AppNavigation';
 function App() {
   return (
     <SafeAreaProvider>
-      <Container>
-        <LoginScreen />
-      </Container>
+      <NavigationContainer>
+        <Container>
+          <AppNavigation />
+        </Container>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }

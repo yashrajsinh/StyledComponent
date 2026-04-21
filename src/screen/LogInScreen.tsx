@@ -5,9 +5,13 @@ import styled from 'styled-components/native';
 const { width } = Dimensions.get('window');
 
 const LOGO_IMG =
-  'https://img.freepik.com/premium-vector/bodybuilding-gym-logo-template_981215-132.jpg';
+  'https://img.freepik.com/premium-vector/gym-maniac-esport-mascot-logo-design_119810-1979.jpg';
 
-export default function LoginScreen() {
+type Props = {
+  navigation: any;
+};
+
+export default function LoginScreen({ navigation }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -54,7 +58,7 @@ export default function LoginScreen() {
 
           <LoginButton
             disabled={!email || !password}
-            onPress={() => console.log('LOGIN PRESSED')}
+            onPress={() => navigation.navigate('WorkOutScreen')}
           >
             <ButtonText>UNLEASH POWER</ButtonText>
           </LoginButton>
@@ -79,13 +83,14 @@ const Header = styled.View`
 `;
 
 const ImageContainer = styled.View`
-  width: ${width * 0.7}px;
-  height: ${width * 0.7}px;
+  width: ${width * 0.6}px;
+  height: ${width * 0.6}px;
 `;
 
 const HeroImage = styled.Image`
   width: 100%;
   height: 100%;
+  border-radius: 15px;
 `;
 
 const Sheet = styled.View`
