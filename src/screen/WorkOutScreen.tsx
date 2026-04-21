@@ -1,51 +1,54 @@
 import React from 'react';
-import { FlatList, StatusBar } from 'react-native';
+import { FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 
 import { Workouts } from '../data/Workouts';
 
-const WorkOutScreen = () => {
+interface Props {
+  data?: any[];
+  accent?: string;
+  cardHeight?: number;
+}
+
+const WorkOutScreen = ({
+  data = Workouts,
+  accent = '#38bdf8',
+  cardHeight = 300,
+}: Props) => {
   return (
     <Container>
-      <StatusBar barStyle="light-content" />
-
       <FlatList
-        data={Workouts}
+        data={data}
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => (
           <HeaderSection>
-            <Tagline>BEAST MODE ON</Tagline>
+            <Tagline accent={accent}>BEAST MODE ON</Tagline>
             <TitleLine>
-              Transform <Highlight>Your</Highlight>
+              Transform <Highlight accent={accent}>Your</Highlight>
             </TitleLine>
             <TitleLine>Physique</TitleLine>
           </HeaderSection>
         )}
-        contentContainerStyle={{ paddingBottom: 40 }}
         renderItem={({ item }) => {
           const [instruction, volume] = item.description.split('•');
 
           return (
-            <CardContainer activeOpacity={0.95}>
+            <CardContainer activeOpacity={0.95} height={cardHeight}>
               <WorkoutImage
                 source={{ uri: item.image, priority: FastImage.priority.high }}
-                resizeMode={FastImage.resizeMode.cover}
+                resizeMode="cover"
               />
 
               <TextShroud>
                 <InfoWrapper>
-                  <VolumeBadge>
-                    <VolumeText>{volume ? volume.trim() : 'PRO'}</VolumeText>
-                  </VolumeBadge>
-
                   <WorkoutTitle>{item.name}</WorkoutTitle>
                   <FullDescription>{instruction.trim()}</FullDescription>
                 </InfoWrapper>
 
                 <ActionCircle>
-                  <Arrow>→</Arrow>
+                  <Arrow> → </Arrow>
                 </ActionCircle>
               </TextShroud>
             </CardContainer>
@@ -58,7 +61,7 @@ const WorkOutScreen = () => {
 
 export default WorkOutScreen;
 
-// --- STYLES ---
+// --- STYLED COMPONENTS ---
 
 const Container = styled.View`
   flex: 1;
@@ -66,11 +69,11 @@ const Container = styled.View`
 `;
 
 const HeaderSection = styled.View`
-  padding: 30px 20px 15px 24px;
+  padding: 35px;
 `;
 
-const Tagline = styled.Text`
-  color: #38bdf8;
+const Tagline = styled.Text<{ accent: string }>`
+  color: ${props => props.accent};
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 3px;
@@ -84,16 +87,16 @@ const TitleLine = styled.Text`
   line-height: 38px;
 `;
 
-const Highlight = styled.Text`
-  color: #38bdf8;
+const Highlight = styled.Text<{ accent: string }>`
+  color: ${props => props.accent};
   font-style: italic;
 `;
 
-const CardContainer = styled.TouchableOpacity`
-  min-height: 320px; /* Reduced from 400px for a punchier look */
-  margin: 10px 18px;
-  border-radius: 28px;
-  overflow: hidden;
+// Passing 'height' prop directly to styled component
+const CardContainer = styled.TouchableOpacity<{ height: number }>`
+  height: ${props => props.height}px;
+  margin: 10px 10px; //vertical and horizontal margin
+  border-radius: 20px;
   background-color: #111;
   border: 1px solid rgba(255, 255, 255, 0.1);
 `;
@@ -106,8 +109,8 @@ const WorkoutImage = styled(FastImage)`
 
 const TextShroud = styled.View`
   margin-top: auto;
-  padding: 20px; /* Tighter padding */
-  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.75);
   flex-direction: row;
   align-items: flex-end;
   border-top-width: 1px;
@@ -116,21 +119,6 @@ const TextShroud = styled.View`
 
 const InfoWrapper = styled.View`
   flex: 1;
-`;
-
-const VolumeBadge = styled.View`
-  align-self: flex-start;
-  background-color: #38bdf8;
-  padding: 3px 8px;
-  border-radius: 6px;
-  margin-bottom: 6px;
-`;
-
-const VolumeText = styled.Text`
-  color: #000;
-  font-size: 10px;
-  font-weight: 900;
-  text-transform: uppercase;
 `;
 
 const WorkoutTitle = styled.Text`
@@ -145,7 +133,6 @@ const FullDescription = styled.Text`
   color: #cbd5e1;
   font-size: 14px;
   line-height: 19px;
-  font-weight: 400;
   opacity: 0.85;
 `;
 
