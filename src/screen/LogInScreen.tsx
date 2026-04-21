@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 const { width } = Dimensions.get('window');
 
 const LOGO_IMG =
-  'https://img.freepik.com/premium-vector/gym-maniac-esport-mascot-logo-design_119810-1979.jpg';
+  'https://img.freepik.com/premium-vector/muscle-man-mascot-logo-design_119810-1472.jpg';
 
 type Props = {
   navigation: any;
